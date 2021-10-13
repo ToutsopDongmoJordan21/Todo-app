@@ -46,8 +46,8 @@ function App() {
     if(localStorage.getItem ("todos") ===null) {
       localStorage.setItem("todos", JSON.stringify([]));
     } else {
-      let todoLocal = localStorage.getItem("todos", JSON.stringify(todos));
-      console.log(todoLocal);
+      let todoLocal = JSON.parse(localStorage.getItem("todos"));
+      setTodos(todoLocal);
     }
   }
 
