@@ -4,6 +4,11 @@ import TodoList from'./components/TodoList';
 import './App.css';
 
 function App() {
+
+  //Run once when the app start
+  useEffect(() => {
+    getLocalTodos();
+  },[]); 
   
   // State stuff
   const [inputText, setInputText] = useState("");
@@ -14,6 +19,7 @@ function App() {
   //Use Effect
   useEffect(() => {
     filterHandler();
+    saveLocalTodos();
   }, [todos, status]);
 
   //Functions
@@ -30,6 +36,20 @@ function App() {
         break;
     }
   };
+
+  // Save to local
+  const saveLocalTodos = () => {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }; 
+
+  const getLocalTodos = () => {
+    if(localStorage.getItem ("todos") ===null) {
+      localStorage.setItem("todos", JSON.stringify([]));
+    } else {
+      let todoLocal = localStorage.getItem("todos", JSON.stringify(todos));
+      console.log(todoLocal);
+    }
+  }
 
   return (
     <div className="App">
