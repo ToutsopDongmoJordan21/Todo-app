@@ -7,11 +7,17 @@ const Form = ({setInputText,setStatus, todos, setTodos, inputText}) => {
     
     const submitTodoHandler = (e) => {
         e.preventDefault();
-        setTodos([
-            ...todos, 
-            {text: inputText, completed: false, id: Math.random() *1000},
-        ]);
-        setInputText("");
+        if(inputText.trim() === "") {
+            alert("Insert text in the required field");
+        }
+        else {
+            setTodos([
+                ...todos, 
+                {text: inputText, completed: false, id: Math.random() *1000},
+            ]);
+            setInputText("");
+        }
+        
     };
 
     const statusHandler = (e) => {
@@ -25,7 +31,8 @@ const Form = ({setInputText,setStatus, todos, setTodos, inputText}) => {
                     value={inputText} 
                     onChange={inputTextHandler} 
                     type="text" 
-                    className="todo-input" />
+                    className="todo-input"
+                    />
                 <button onClick={submitTodoHandler} className="todo-button" type="submit">
                     <i className="fas fa-plus-square"></i>
                 </button>
